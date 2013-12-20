@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h1>Welcome</h1>
+  <p>Welcome, {{loggedInUser()}}.</p>
+  <p>Go see this thing only logged in people can see! <a href="/logged-in-only">Click me</a>.</p>
+  <p>Or visit this page where it doesn't matter. <a href="/dont-care">Click me</a>.</p>
+{% endblock %}

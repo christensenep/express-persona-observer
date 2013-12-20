@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block head -%}
+    <script src="https://login.persona.org/include.js"></script>
+    <script>
+      navigator.id.watch({
+        {% block loggedInUser %}
+        loggedInUser: {% if loggedInUser() %}"{{ loggedInUser() }}"{% else %}null{% endif %},
+        {% endblock %}
+        onlogin: function(assertion) {
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "/persona/verify", true);
+          xhr.setRequestHeader("Content-Type", "application/json");
+          xhr.addEventListener("loadend", function(e) {
+            var data = JSON.parse(this.responseText);
+            if (data && data.status === "okay") {
+              {% block onlogin %}
+              document.location.reload(true);
+              {% endblock %}
+            }
+          }, false);
+
+          xhr.send(JSON.stringify({
+            assertion: assertion
+          }));
+        },
+        onlogout: function() {
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "/persona/logout", true);
+          xhr.addEventListener("loadend", function(e) {
+            {% block onlogout %}
+            document.location.reload(true);
+            {% endblock %}
+          });
+          xhr.send();
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector("#login").addEventListener("click", function() {
+          navigator.id.request();
+        }, false);
+
+        document.querySelector("#logout").addEventListener("click", function() {
+          navigator.id.logout();
+        }, false);
+
+        document.querySelector("#invalidate").addEventListener("click", function () {
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "/invalidate-session", true);
+          xhr.addEventListener("loadend", function(e) {
+            var data = JSON.parse(this.responseText);
+            console.log('OK, invalidated.', data);
+          });
+          xhr.send();
+        }, false);
+    
+      }, false);
+    </script>
+  {%- endblock %}
+</head>
+<body>
+  {% block header -%}
+  <header>
+    <button id="login" {% if loggedInUser() %}disabled="disabled"{% endif %}>Login</button>
+    <button id="logout" {% if not loggedInUser() %}disabled="disabled"{% endif %}>Logout</button>
+    <button id="invalidate">Invalidate session</button>
+  </header>
+  {%- endblock %}
+  {% block body -%}
+  Boooody
+  {%- endblock %}
+</body>
+</html>

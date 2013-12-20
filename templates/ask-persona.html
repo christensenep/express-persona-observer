@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block loggedInUser %} {% endblock %}
+{% block onlogin %}
+  window.location = "{{url}}";
+{% endblock %}
+{% block body %}
+  <p>Asking persona who's logged in...</p>
+{% endblock %}
