@@ -1,0 +1,17 @@
+{
+  "name": "express-persona-observer",
+  "version": "0.0.1",
+  "author": "Mike Larsson <mikelarssonftw@gmail.com>",
+  "description": "Opinionated Mozilla Persona Observer API authentication for your Express application",
+  "main": "index.js",
+  "dependencies": {
+    "minstache": "~1.1.0",
+    "express-persona": "~0.1.1"
+  },
+  "devDependencies": {
+    "express": "~3.4.7",
+    "nunjucks": "~1.0.1",
+    "should": "~2.1.1",
+    "mocha": "~1.16.1"
+  }
+}

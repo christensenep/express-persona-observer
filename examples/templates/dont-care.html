@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h1>I don't care</h1>
+  {% if loggedInUser %}
+  <p>You're logged in, that's cool.</p>
+  {% else %}
+  <p>Howdy stranger.</p>
+  {% endif %}
+{% endblock %}
