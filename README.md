@@ -1,4 +1,5 @@
-# express-persona-observer
+express-persona-observer
+========================
 
 Opinionated Mozilla Persona integration for Express. express-persona-observer adds functionality
 to [express-persona][] to make integration of Persona using its Observer API even more seamless.
@@ -70,3 +71,4 @@ methods, and application locals to take the pain out of writing Persona-based ap
   * Default: none
   * `req, res, next` are the typical express middleware callback arguments
 * **TODO**: finish docs
+
