@@ -72,3 +72,6 @@ methods, and application locals to take the pain out of writing Persona-based ap
   * `req, res, next` are the typical express middleware callback arguments
 * **TODO**: finish docs
 
+## Tests
+
+Tests can be run with `npm test`. Test coverage can be generated with `node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -R spec test/*.test.js`.

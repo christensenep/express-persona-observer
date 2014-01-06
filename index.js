@@ -44,7 +44,7 @@ module.exports.express = function (app, config) {
   app.use(function (req, res, next) {
     // use req.fromLoggedInUser() in route handlers to determine if you have a user or not
     req.fromLoggedInUser = function () {
-      return req.session && req.session[config.sessionKey];
+      return !!(req.session && req.session[config.sessionKey]);
     };
     // email address of the logged in user, or null, for use in templates
     res.locals = {
