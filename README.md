@@ -87,12 +87,12 @@ pain out of writing Persona-based applications.
   * `app` is an instance of the express server that you want to add routes to.
   * `options` is an object. It has one required parameter, `audience`.
 
-### Required options
+#### Required options
 
-* `audience` = The URL of your express app when viewed in a browser. Must include the protocol, hostname, and port.
+* `audience` - The URL of your express app when viewed in a browser. Must include the protocol, hostname, and port.
   * Example: `http://example.org:80`, `https://example.org:443`
 
-### Optional options
+#### Optional options
 
 * `express-persona-observer` supports all [`express-persona` options](https://github.com/jbuck/express-persona/tree/v0.1.0#optional-options).
 * `syncResponse(req, res, next)` - Response handler when your app needs to synchronize its session with Persona
