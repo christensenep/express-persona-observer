@@ -40,6 +40,9 @@ module.exports.express = function (app, config) {
   config.sessionKey = config.sessionKey || "email";
 
   var exemptPaths = config.exemptPaths || [];
+  var selectors = config.selectors || {};
+  selectors.login = selectors.login || '#login';
+  selectors.logout = selectors.logout || '#logout';
   redirects = config.redirects || {};
 
   function exemptPath (url) {
@@ -85,8 +88,8 @@ module.exports.express = function (app, config) {
       loggedInUser: email,
       verifyPath: config.verifyPath,
       logoutPath: config.logoutPath,
-      loginSelector: '#login',
-      logoutSelector: '#logout'
+      loginSelector: selectors.login,
+      logoutSelector: selectors.logout
     }));
   });
 

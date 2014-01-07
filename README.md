@@ -106,6 +106,9 @@ pain out of writing Persona-based applications.
   * `notLoggedIn` - string specifying default redirect path for `ensureLoggedIn`
   * `notLoggedOut` - string specifying default redirect path for `ensureLoggedOut`
 * `exemptPaths` - an array of strings specifying paths that are exempt from synchronization
+* `selectors` - object containing login and logout button selectors
+  * login - string specifying login button selector, defaults to `#login`
+  * logout - string specifying logout button selector, defaults to `#logout`
 
 ## Tests
 

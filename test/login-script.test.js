@@ -40,4 +40,20 @@ describe('login.js', function () {
       });
     }.bind(this));
   });
+
+  app('should use configured selectors', {
+    config: {
+      selectors: {
+        login: '#foo',
+        logout: '#bar'
+      }
+    }
+  }, function (done) {
+    this.request(this.server.urlTo('/persona/login.js'), function (err, res, body) {
+      if (err) return done(err);
+      body.should.include('document.querySelector("#foo")');
+      body.should.include('document.querySelector("#bar")');
+      done();
+    });
+  });
 });
