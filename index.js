@@ -7,24 +7,30 @@ var loginjs = minstache.compile(fs.readFileSync(path.join(__dirname, './template
 
 var redirects;
 
-module.exports.ensureLoggedIn = function ensureLoggedIn (req, res, next) {
-  if (!req.fromLoggedInUser()) {
-    if (redirects.notLoggedIn)
-      return res.redirect(303, redirects.notLoggedIn);
-    else
-      return next('Not logged in');
-  }
-  return next();
+module.exports.ensureLoggedIn = function ensureLoggedIn (path) {
+  return function (req, res, next) {
+    var redirectPath = path || redirects.notLoggedIn;
+    if (!req.fromLoggedInUser()) {
+      if (redirectPath)
+        return res.redirect(303, redirectPath);
+      else
+        return next('Not logged in');
+    }
+    return next();
+  };
 };
 
-module.exports.ensureLoggedOut = function ensureLoggedOut (req, res, next) {
-  if (req.fromLoggedInUser()) {
-    if (redirects.notLoggedOut)
-      return res.redirect(303, redirects.notLoggedOut);
-    else
-      return next('Logged in');
-  }
-  return next();
+module.exports.ensureLoggedOut = function ensureLoggedOut (path) {
+  return function (req, res, next) {
+    var redirectPath = path || redirects.notLoggedOut;
+    if (req.fromLoggedInUser()) {
+      if (redirectPath)
+        return res.redirect(303, redirectPath);
+      else
+        return next('Logged in');
+    }
+    return next();
+  };
 };
 
 module.exports.express = function (app, config) {

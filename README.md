@@ -35,6 +35,15 @@ Include the Persona library and login script in your web pages:
 <script src="/persona/login.js"></script>
 ```
 
+or
+
+```html
+<script src="https://login.persona.org/include.js"></script>
+<script src="{{loginScriptUrl}}"></script>
+```
+
+if you're using a templating engine.
+
 Add login and logout buttons to your page:
 
 ```html
@@ -50,13 +59,32 @@ You can view and run a complete example in the [examples directory](#).
 ## Documentation
 
 `express-persona-observer` provides both the server and client-side code to integrate Persona
-into your express application. It provides several useful route middleware methods, request
-methods, and application locals to take the pain out of writing Persona-based applications.
+into your express application, with sensible defaults so it works right out of the box. Additionally, 
+it provides several useful route middleware methods, request methods, and application locals to take the 
+pain out of writing Persona-based applications.
 
-### API
+### Route middleware
+
+* `ensureLoggedIn([path])` - errors or redirects if a user is not logged in 
+  * `path` is an optional string specifying a redirect path; if omitted `next()` will be called with an error
+    unless a default redirect path has been specified as an option to `express()`
+* `ensureLoggedOut([path])` - errors or redirects if a user is logged in
+  * `path` is an optional string specifying a redirect path; if omitted `next()` will be called with an error
+    unless a default redirect path has been specified as an option to `express()`
+
+### Request helpers
+
+* `fromLoggedInUser` - returns true if the request session includes a user
+
+### Templating locals
+
+* `loggedInUser` - logged in user email, or null
+* `loginScriptUrl` - path to `login.js`
+
+### Configuration
 
 * `express(app, options)`
-  * `express` is an instance of the express server that you want to add routes to.
+  * `app` is an instance of the express server that you want to add routes to.
   * `options` is an object. It has one required parameter, `audience`.
 
 ### Required options
@@ -67,10 +95,16 @@ methods, and application locals to take the pain out of writing Persona-based ap
 ### Optional options
 
 * `express-persona-observer` supports all [`express-persona` options](https://github.com/jbuck/express-persona/tree/v0.1.0#optional-options).
-* `syncResponse(req, res, next)` - Function to generate response when the appliation wants to sync it's session with Persona
+* `syncResponse(req, res, next)` - Response handler when your app needs to synchronize its session with Persona
   * Default: none
   * `req, res, next` are the typical express middleware callback arguments
-* **TODO**: finish docs
+  * The provided handler should return a page that loads `login.js`, which handles synchronization with Persona. The path will then
+    be reloaded.
+* `loginjsPath` - Path at which `login.js` will be hosted.
+  * Default: '/persona/login.js'
+* `redirects` - object containing default redirects for route middleware methods
+  * `notLoggedIn` - string specifying default redirect path for `ensureLoggedIn`
+  * `notLoggedOut` - string specifying default redirect path for `ensureLoggedOut`
 
 ## Tests
 

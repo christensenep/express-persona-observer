@@ -35,10 +35,16 @@ function runTestServer (opts, done) {
   app.get('/fromLoggedInUser', function (req, res, next) {
     return res.json({ result: req.fromLoggedInUser()});
   });
-  app.get('/loggedInOnly', persona.ensureLoggedIn, function (req, res, next) {
+  app.get('/loggedInOnly', persona.ensureLoggedIn(), function (req, res, next) {
     return res.send('OK'); 
   });
-  app.get('/loggedOutOnly', persona.ensureLoggedOut, function (req, res, next) {
+  app.get('/loggedInOnlyRedirect', persona.ensureLoggedIn('/'), function (req, res, next) {
+    return res.send('OK'); 
+  });
+  app.get('/loggedOutOnly', persona.ensureLoggedOut(), function (req, res, next) {
+    return res.send('OK'); 
+  });
+  app.get('/loggedOutOnlyRedirect', persona.ensureLoggedOut('/'), function (req, res, next) {
     return res.send('OK'); 
   });
   app.get('/locals', function (req, res, next) {
