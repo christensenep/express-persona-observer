@@ -14,7 +14,8 @@
     "should": "~2.1.1",
     "mocha": "~1.16.1",
     "request": "~2.30.0",
-    "istanbul": "~0.2.3"
+    "istanbul": "~0.2.3",
+    "underscore": "~1.5.2"
   },
   "scripts": {
     "test": "node_modules/.bin/mocha -R spec test/*.test.js"
