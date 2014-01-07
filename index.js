@@ -39,12 +39,15 @@ module.exports.express = function (app, config) {
   config.loginjsPath = config.loginjsPath || "/persona/login.js";
   config.sessionKey = config.sessionKey || "email";
 
+  var exemptPaths = config.exemptPaths || [];
   redirects = config.redirects || {};
 
   function exemptPath (url) {
-    return url === config.logoutPath
-        || url === config.verifyPath
-        || url === config.loginjsPath;
+    return exemptPaths.concat([
+      config.logoutPath, 
+      config.verifyPath, 
+      config.loginjsPath
+    ]).indexOf(url) !== -1;
   }
 
   app.use(function (req, res, next) {

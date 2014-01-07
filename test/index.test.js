@@ -44,4 +44,23 @@ describe('config', function () {
       }.bind(this));
     });
   });
+
+  describe('exempt urls', function () {
+    var synced = false;
+    app('should not call syncResponse on exempt URLs', {
+      config: {
+        syncResponse: function (req, res, next) {
+          synced = true;
+          res.send('ok');
+        },
+        exemptPaths: ['/locals']
+      }
+    }, function (done) {
+      this.request(this.server.urlTo('/locals'), function (err) {
+        if (err) return done(err);
+        synced.should.be.false;
+        done();
+      });
+    });
+  });
 });

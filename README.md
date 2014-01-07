@@ -105,6 +105,7 @@ pain out of writing Persona-based applications.
 * `redirects` - object containing default redirects for route middleware methods
   * `notLoggedIn` - string specifying default redirect path for `ensureLoggedIn`
   * `notLoggedOut` - string specifying default redirect path for `ensureLoggedOut`
+* `exemptPaths` - an array of strings specifying paths that are exempt from synchronization
 
 ## Tests
 
