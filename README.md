@@ -95,13 +95,13 @@ pain out of writing Persona-based applications.
 #### Optional options
 
 * `express-persona-observer` supports all [`express-persona` options](https://github.com/jbuck/express-persona/tree/v0.1.0#optional-options).
-* `syncResponse(req, res, next)` - Response handler when your app needs to synchronize its session with Persona
+* `syncResponse(req, res, next)` - Response handler when your app needs to synchronize its session with Persona.
   * Default: none
   * `req, res, next` are the typical express middleware callback arguments
   * The provided handler should return a page that loads `login.js`, which handles synchronization with Persona. The path will then
-    be reloaded.
+    be reloaded automatically.
 * `loginjsPath` - Path at which `login.js` will be hosted.
-  * Default: '/persona/login.js'
+  * Default: `/persona/login.js`
 * `redirects` - object containing default redirects for route middleware methods
   * `notLoggedIn` - string specifying default redirect path for `ensureLoggedIn`
   * `notLoggedOut` - string specifying default redirect path for `ensureLoggedOut`
