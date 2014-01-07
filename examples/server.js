@@ -30,13 +30,13 @@ persona.express(app, {
 });
 
 // routes
-app.get('/login', [persona.ensureLoggedOut], function (req, res, next) {
+app.get('/login', [persona.ensureLoggedOut()], function (req, res, next) {
   return res.render('login.html');
 });
-app.get('/', [persona.ensureLoggedIn], function (req, res, next) {
+app.get('/', [persona.ensureLoggedIn()], function (req, res, next) {
   return res.render('welcome.html');
 });
-app.get('/logged-in-only', [persona.ensureLoggedIn], function (req, res, next) {
+app.get('/logged-in-only', [persona.ensureLoggedIn()], function (req, res, next) {
   return res.render('logged-in-only.html');
 });
 app.get('/dont-care', function (req, res, next) {

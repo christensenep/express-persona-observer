@@ -17,6 +17,24 @@
         }, false);
       }, false);
     </script>
+    <style>
+      header {
+        margin: 0;
+        padding: 1em;
+        border-bottom: 1px dashed #333;
+      }
+
+      .note {
+        display: inline-block;
+        padding: 0.5em;
+        background-color: #FFECA3;
+      }
+
+      label {
+        margin-left: 0.5em;
+        color: #333;
+      }
+    </style>
   {%- endblock %}
 </head>
 <body>
@@ -24,7 +42,7 @@
   <header>
     <button id="login" {% if loggedInUser %}disabled="disabled"{% endif %}>Login</button>
     <button id="logout" {% if not loggedInUser %}disabled="disabled"{% endif %}>Logout</button>
-    <button id="invalidate">Invalidate session</button>
+    <button id="invalidate">Invalidate session</button><label for="invalidate"><small>Invalidates session, but does not reload page</small></label>
   </header>
   {%- endblock %}
   {% block body -%}
