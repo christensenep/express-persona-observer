@@ -59,10 +59,8 @@ module.exports.express = function (app, config) {
       return !!(req.session && req.session[config.sessionKey]);
     };
     // email address of the logged in user, or null, for use in templates
-    res.locals = {
-      loggedInUser: req.session[config.sessionKey] || null,
-      loginScriptUrl: config.loginjsPath
-    };
+    res.locals.loggedInUser = req.session[config.sessionKey] || null;
+    res.locals.loginScriptUrl = config.loginjsPath;
     next();
   });
 
