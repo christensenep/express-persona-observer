@@ -1,6 +1,6 @@
 {
   "name": "express-persona-observer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Mike Larsson <mikelarssonftw@gmail.com>",
   "description": "Opinionated Mozilla Persona Observer API authentication for your Express application",
   "main": "index.js",
