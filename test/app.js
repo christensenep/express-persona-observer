@@ -48,7 +48,7 @@ function runTestServer (opts, done) {
     return res.send('OK'); 
   });
   app.get('/locals', function (req, res, next) {
-    return res.json(res.locals);
+    return res.json({loggedInUser: res.locals.loggedInUser, loginScriptUrl: res.locals.loginScriptUrl});
   });
 
   app.use(function (err, req, res, next) {
