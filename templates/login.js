@@ -26,15 +26,15 @@ navigator.id.watch({
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-  var login = document.querySelector("{{loginSelector}}");
-  if (login)
-    login.addEventListener("click", function() {
+  var logins = document.querySelectorAll("{{loginSelector}}");
+  for (var i = 0; i < logins.length; i++)
+    logins[i].addEventListener("click", function() {
       navigator.id.request();
     }, false);
 
-  var logout = document.querySelector("{{logoutSelector}}")
-  if (logout)
-    logout.addEventListener("click", function() {
+  var logouts = document.querySelectorAll("{{logoutSelector}}");
+  for (i = 0; i < logouts.length; i++)
+    logouts[i].addEventListener("click", function() {
       navigator.id.logout();
     }, false);
 });
